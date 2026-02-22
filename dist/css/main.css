@@ -463,4 +463,70 @@
   z-index: 2;
   pointer-events: none;
   opacity: 0.8;
+}
+
+.gallery {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+}
+
+.share {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #fff;
+}
+.share__content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.share__text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+.share__url {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1;
+  cursor: pointer;
+}
+.share__back-to-top {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize;
+  padding-bottom: 5px;
+  margin-top: 1rem;
+  transition: border-bottom 0.3s ease;
+}
+.share__footer {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+.share__footer p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  opacity: 0.6;
 }/*# sourceMappingURL=main.css.map */
