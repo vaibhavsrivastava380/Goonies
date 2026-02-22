@@ -63,6 +63,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  position: relative;
 }
 .header .nav-bar .nav-box {
   height: 100%;
@@ -70,9 +71,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .header .nav-bar .nav-box .nav-item {
-  height: 100%;
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -82,12 +83,64 @@
   font-size: 14px;
   color: #fff;
   text-decoration: none;
+  margin-bottom: 5px;
 }
-.header .nav-bar .nav-box .nav-circle {
-  height: 10px;
-  width: 10px;
+.header .nav-bar .nav-indicator {
+  position: absolute;
+  bottom: -6px;
+  left: 12.5%;
+  transform: translateX(-50%);
+  height: 7px;
+  width: 7px;
   background-color: #fff;
   border-radius: 50%;
+  z-index: 10;
+}
+
+.audio-control {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+.audio-control .audio-player {
+  width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform-origin: bottom right;
+}
+.audio-control .audio-player.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.audio-control .audio-player iframe {
+  display: block;
+}
+.audio-control .audio-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+.audio-control .audio-toggle .speaker {
+  width: 18px;
+  height: 18px;
 }
 
 .hero {
@@ -481,6 +534,17 @@
   justify-content: center;
   position: relative;
   color: #fff;
+  overflow: hidden;
+}
+.share__line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 5;
 }
 .share__content {
   text-align: center;

@@ -83,6 +83,10 @@ heroTimeline.to(".hero-cursor", {
 
 
 
+heroTimeline.to(".nav-indicator", {
+    opacity: 1,
+    duration: 0.2
+}, 0.25);
 
 // Goonies Hover Animation
 const goonies = document.querySelectorAll(".goonie");
@@ -301,4 +305,49 @@ gsap.to(".skull-front", {
         scrub: 2
     }
 });
+
+// Share Section Line Animation
+gsap.from(".share__line", {
+    height: "30%",
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".share",
+        start: "top center",
+        end: "bottom bottom",
+        scrub: 1
+    }
+});
+// Audio Player Toggle Logic
+const audioToggle = document.getElementById("audioToggle");
+const audioPlayer = document.getElementById("audioPlayer");
+
+if (audioToggle && audioPlayer) {
+    audioToggle.addEventListener("click", () => {
+        audioPlayer.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!audioToggle.contains(e.target) && !audioPlayer.contains(e.target)) {
+            audioPlayer.classList.remove("active");
+        }
+    });
+}
+
+// Navbar Indicator Animation
+gsap.set(".nav-indicator", { opacity: 0 });
+
+const masterNavTL = gsap.timeline({
+    scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5
+    }
+});
+
+masterNavTL
+    .to(".nav-indicator", { left: "12.5%", duration: 0.5 })
+    .to(".nav-indicator", { left: "37.5%", duration: 1, ease: "none" })
+    .to(".nav-indicator", { left: "62.5%", duration: 1, ease: "none" })
+    .to(".nav-indicator", { left: "87.5%", duration: 1, ease: "none" });
 

@@ -19,18 +19,19 @@
 
     <header class="header">
         <nav class="nav-bar">
-            <div class="nav-box"><a class="nav-item" href="#">Plot</a>
-                <div class="nav-circle active"></div>
+            <div class="nav-box">
+                <a class="nav-item" href="#plot">Plot</a>
             </div>
-            <div class="nav-box"><a class="nav-item" href="#">Goonies</a>
-                <div class="nav-circle"></div>
+            <div class="nav-box">
+                <a class="nav-item" href="#goonies">Goonies</a>
             </div>
-            <div class="nav-box"><a class="nav-item" href="#">Credits</a>
-                <div class="nav-circle"></div>
+            <div class="nav-box">
+                <a class="nav-item" href="#credits">Credits</a>
             </div>
-            <div class="nav-box"><a class="nav-item" href="#">Gallery</a>
-                <div class="nav-circle"></div>
+            <div class="nav-box">
+                <a class="nav-item" href="#gallery">Gallery</a>
             </div>
+            <div class="nav-indicator"></div>
         </nav>
     </header>
 
@@ -49,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="hero-plot">
+            <div class="hero-plot" id="plot">
                 <h1 class="hero-plot__title">Plot</h1>
                 <p class="hero-plot__text">
                     Facing foreclosure of their homes in the Goon Docks area of Astoria, Oregon to an expanding country
@@ -70,7 +71,7 @@
         </div>
     </section>
 
-    <section class="goonies">
+    <section class="goonies" id="goonies">
         <div class="goonies-box">
             <div class="goonie">
                 <img class="goonie__img" src="./assessts/goons/someone.jpg" alt="Mikey">
@@ -123,7 +124,7 @@
         </div>
     </section>
 
-    <section class="credits">
+    <section class="credits" id="credits">
         <div class="credits__top">
             <div class="credits__top__card--1">
                 <div class="card__text">1985</div>
@@ -183,7 +184,7 @@
 
     </section>
 
-    <section class="gallery">
+    <section class="gallery" id="gallery">
         <div class="gallery__box">
             <!-- <img src="./assessts/gallery/img-11.jpg" alt="" class="gallery__img gallery__img--1">
             <img src="./assessts/gallery/img-10.jpg" alt="" class="gallery__img gallery__img--2">
@@ -207,8 +208,8 @@
             </button> -->
         </div>
     </section>
-
     <section class="share">
+        <div class="share__line"></div>
         <div class="share__content">
             <p class="share__text">Share this experience</p>
             <h2 class="share__url">the-goonies.netlify.app</h2>
@@ -218,6 +219,24 @@
             <p>CREATED BY VAIBHAV SRIVASTAVA</p>
         </div>
     </section>
+
+    <div class="audio-control">
+        <div class="audio-player" id="audioPlayer">
+            <iframe width="100%" height="166" scrolling="no" frameborder="no"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2054341720&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+            <div
+                style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;">
+                <a href="https://soundcloud.com/playboicarti" title="playboicarti" target="_blank"
+                    style="color: #cccccc; text-decoration: none;">playboicarti</a> · <a
+                    href="https://soundcloud.com/playboicarti/evil-j0rdan" title="EVIL J0RDAN" target="_blank"
+                    style="color: #cccccc; text-decoration: none;">EVIL J0RDAN</a>
+            </div>
+        </div>
+        <button class="audio-toggle" id="audioToggle">
+            <img class="speaker" src="./assessts/common/speaker-on.png" alt="">
+        </button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
     <script src="./js/script.js"></script>
