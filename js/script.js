@@ -1,4 +1,4 @@
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Hero Scroll Animation
 const heroTimeline = gsap.timeline({
@@ -350,4 +350,19 @@ masterNavTL
     .to(".nav-indicator", { left: "37.5%", duration: 1, ease: "none" })
     .to(".nav-indicator", { left: "62.5%", duration: 1, ease: "none" })
     .to(".nav-indicator", { left: "87.5%", duration: 1, ease: "none" });
+
+// Back to Top Smooth Scroll
+const backToTopBtn = document.querySelector(".share__back-to-top");
+
+
+    backToTopBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        gsap.to(window, {
+            duration: 7,
+            scrollTo: 0,
+            ease: "power2.inOut"
+        });
+    });
+
+
 
