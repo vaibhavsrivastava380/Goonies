@@ -1,0 +1,135 @@
+.goonies {
+    height: 200vh;
+    width: 100%;
+    background-color: $color-black;
+
+    &-box {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        overflow: hidden;
+
+        & .goonie {
+            position: relative;
+            height: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 30%);
+                z-index: 1;
+            }
+
+            &__img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                filter: brightness(0.5);
+            }
+
+
+            &__name {
+                position: absolute;
+                bottom: 2%;
+                left: -30%;
+                z-index: 2;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+                pointer-events: none;
+
+                &__text {
+                    font-family: $font-sharp;
+                    font-size: 22px;
+                    color: $color-white;
+                    opacity: 0;
+                }
+
+                &__showmore {
+                    font-family: $font-montserrat;
+                    font-size: 11px;
+                    color: rgba(255, 255, 255, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    letter-spacing: 1px;
+                    opacity: 0;
+                }
+            }
+
+            &__arrow {
+                width: 10px;
+                height: auto;
+                filter: invert(1);
+            }
+        }
+    }
+
+    &-coins {
+        height: 100vh;
+        width: 100%;
+        background-color: $color-black;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .coint__text {
+            font-family: $font-sharp;
+            font-size: 2rem;
+            color: $color-white;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        & img {
+            position: absolute;
+            z-index: 2;
+            object-fit: contain;
+        }
+
+        & .coin-big {
+            width: 150px;
+            top: 50%;
+            left: 45%;
+            transform: translate(-50%, -50%);
+            rotate: 10deg;
+        }
+
+        & .coin-1 {
+            width: 100px;
+            top: 10%;
+            left: 15%;
+        }
+
+        & .coin-2 {
+            width: 80px;
+            top: 20%;
+            right: 20%;
+        }
+
+        & .coin-3 {
+            width: 120px;
+            bottom: 15%;
+            left: 27%;
+        }
+
+        & .coin-4 {
+            width: 90px;
+            bottom: 25%;
+            right: 20%;
+        }
+    }
+}
