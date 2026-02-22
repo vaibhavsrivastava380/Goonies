@@ -119,7 +119,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,19 +145,31 @@
   position: absolute;
   bottom: 5%;
   left: 50%;
-  z-index: 2;
+  z-index: 3;
   height: 10%;
 }
 .hero-box .hero-cursor__img {
   width: 100%;
   height: 100%;
 }
+.hero-box .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
 .hero-box .hero-plot {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 4;
   width: 40%;
   text-align: center;
   display: flex;
@@ -179,4 +191,276 @@
   line-height: 2.6;
   color: #fff;
   font-weight: 300;
+}
+.hero-box .hero-plot__line {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 5;
+}
+
+.goonies {
+  height: 200vh;
+  width: 100%;
+  background-color: #000;
+}
+.goonies-box {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.goonies-box .goonie {
+  position: relative;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+}
+.goonies-box .goonie::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 30%);
+  z-index: 1;
+}
+.goonies-box .goonie__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+.goonies-box .goonie__name {
+  position: absolute;
+  bottom: 2%;
+  left: -30%;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  pointer-events: none;
+}
+.goonies-box .goonie__name__text {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 22px;
+  color: #fff;
+  opacity: 0;
+}
+.goonies-box .goonie__name__showmore {
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 1px;
+  opacity: 0;
+}
+.goonies-box .goonie__arrow {
+  width: 10px;
+  height: auto;
+  filter: invert(1);
+}
+.goonies-coins {
+  height: 100vh;
+  width: 100%;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goonies-coins .coint__text {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.goonies-coins img {
+  position: absolute;
+  z-index: 2;
+  object-fit: contain;
+}
+.goonies-coins .coin-big {
+  width: 150px;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  rotate: 10deg;
+}
+.goonies-coins .coin-1 {
+  width: 100px;
+  top: 10%;
+  left: 15%;
+}
+.goonies-coins .coin-2 {
+  width: 80px;
+  top: 20%;
+  right: 20%;
+}
+.goonies-coins .coin-3 {
+  width: 120px;
+  bottom: 15%;
+  left: 27%;
+}
+.goonies-coins .coin-4 {
+  width: 90px;
+  bottom: 25%;
+  right: 20%;
+}
+
+.credits {
+  background-color: #000;
+  width: 100%;
+  min-height: 100vh;
+  color: #fff;
+  overflow: hidden;
+}
+.credits__top {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.credits__top > div {
+  position: relative;
+  height: 50vh;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem;
+  overflow: hidden;
+  background-color: transparent;
+  width: 25%;
+}
+.credits__top > div:nth-child(1), .credits__top > div:nth-child(2) {
+  width: 25%;
+}
+.credits__top > div:nth-child(3) {
+  width: 50%;
+}
+.credits__top > div:nth-child(3), .credits__top > div:nth-child(7) {
+  border-right: none;
+}
+.credits__top > div .card__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 10;
+  pointer-events: none;
+}
+.credits__top > div .card__img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.credits__top > div .card__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3);
+}
+.credits__top > div.credits__top__card--3 .card__img img {
+  object-fit: contain;
+  object-position: top center;
+  width: 100%;
+  height: 100%;
+}
+.credits__top > div.credits__top__card--6 .card__img {
+  height: 55%;
+  width: 80%;
+  top: 40%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+.credits__top > div.credits__top__card--4 .card__img, .credits__top > div.credits__top__card--5 .card__img, .credits__top > div.credits__top__card--7 .card__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.credits__top > div.credits__top__card--4 .card__img img, .credits__top > div.credits__top__card--5 .card__img img, .credits__top > div.credits__top__card--7 .card__img img {
+  width: auto;
+  height: 40%;
+  max-width: 70%;
+  object-fit: contain;
+  filter: brightness(0.8);
+}
+.credits__top > div .card__bottom {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: left;
+  width: 100%;
+}
+.credits__top > div .card__bottom_up {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+.credits__top > div .card__bottom_down {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  color: #fff;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+}
+.credits__bottom {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #000;
+  padding: 5rem 0;
+}
+.credits__bottom .skull {
+  width: 20%;
+  max-width: 900px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0.3);
+  z-index: 1;
+}
+.credits__bottom .skull-front {
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 70%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.8;
 }/*# sourceMappingURL=main.css.map */
