@@ -1,0 +1,53 @@
+.audio-control {
+    position: fixed;
+    bottom: 3rem;
+    right: 3rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+
+    .audio-player {
+        width: 300px;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px) scale(0.95);
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform-origin: bottom right;
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        iframe {
+            display: block;
+        }
+    }
+
+    .audio-toggle {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+
+
+
+
+        & .speaker {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
