@@ -80,3 +80,112 @@ heroTimeline.to(".hero-cursor", {
     opacity: 0,
     duration: 0.1,
 }, 0.2);
+
+
+
+
+// Goonies Hover Animation
+const goonies = document.querySelectorAll(".goonie");
+
+goonies.forEach((goonie) => {
+    const img = goonie.querySelector(".goonie__img");
+    const nameText = goonie.querySelector(".goonie__name__text");
+    const showMore = goonie.querySelector(".goonie__name__showmore");
+
+    goonie.addEventListener("mouseenter", () => {
+        gsap.to(img, {
+            filter: "brightness(1)",
+            scale: 1.1,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+        gsap.to(nameText, {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+        gsap.to(showMore, {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        });
+    });
+
+    goonie.addEventListener("mouseleave", () => {
+        gsap.to(img, {
+            filter: "brightness(0.5)",
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+        gsap.to(nameText, {
+            y: 30,
+            opacity: 0,
+            duration: 0.2,
+            ease: "power4.in"
+        });
+        gsap.to(showMore, {
+            y: 40,
+            opacity: 0,
+            duration: 0.2,
+            ease: "power4.in"
+        });
+    });
+});
+
+
+
+
+// Goonies Coins Scroll Animation
+const coinsTimeline = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".goonies-coins",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 2
+    }
+});
+
+// Coin Big: Rotate from 45deg to left
+coinsTimeline.fromTo(".coin-big", {
+    rotate: 45
+}, {
+    rotate: -45,
+    ease: "none"
+}, 0);
+
+coinsTimeline.fromTo(".coin-1", {
+    y: 200,
+}, {
+    y: -200,
+    ease: "none"
+}, 0);
+
+coinsTimeline.fromTo(".coin-2", {
+    y: -300,
+    rotate: 0
+}, {
+    y: 700,
+    rotate: 720,
+    ease: "none"
+}, 0);
+
+coinsTimeline.fromTo(".coin-4", {
+    y: 300,
+    rotate: 0
+}, {
+    y: -700,
+    rotate: -720,
+    ease: "none"
+}, 0);
+
+coinsTimeline.fromTo(".coin-3", {
+    y: -500,
+    rotate: 0
+}, {
+    y: 500,
+    rotate: 360,
+    ease: "none"
+}, 0);
