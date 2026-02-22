@@ -189,3 +189,116 @@ coinsTimeline.fromTo(".coin-3", {
     rotate: 360,
     ease: "none"
 }, 0);
+
+// Credits Hover Animation
+const creditsCards = document.querySelectorAll(".credits__top > div");
+
+creditsCards.forEach((card) => {
+    const text = card.querySelector(".card__text");
+    const img = card.querySelector(".card__img img");
+
+    card.addEventListener("mouseenter", () => {
+        if (text) {
+            const tl = gsap.timeline();
+            tl.to(text, {
+                y: 15,
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.in"
+            });
+
+            tl.set(text, { y: -15 });
+            tl.to(text, {
+                y: 0,
+                opacity: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+
+        if (img) {
+            const isLogoCard = card.classList.contains("credits__top__card--4") ||
+                card.classList.contains("credits__top__card--5") ||
+                card.classList.contains("credits__top__card--7");
+
+            if (!isLogoCard) {
+                gsap.to(img, {
+                    filter: "brightness(1) blur(0px)",
+                    scale: 1.05,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            } else {
+                gsap.to(img, {
+                    scale: 1.08,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            }
+        }
+    });
+
+    if (card.classList.contains("credits__top__card--3")) {
+        card.addEventListener("mousemove", (e) => {
+            const { width } = card.getBoundingClientRect();
+            const mouseX = e.offsetX;
+            const movePercent = (mouseX / width) - 0.5;
+            const moveAmount = movePercent * 60;
+
+            gsap.to(img, {
+                x: -moveAmount,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        });
+    }
+
+    card.addEventListener("mouseleave", () => {
+        if (img) {
+            const isLogoCard = card.classList.contains("credits__top__card--4") ||
+                card.classList.contains("credits__top__card--5") ||
+                card.classList.contains("credits__top__card--7");
+
+            gsap.to(img, { x: 0, duration: 0.5, ease: "power2.inOut" });
+
+            if (!isLogoCard) {
+                gsap.to(img, {
+                    filter: "brightness(0.4) ",
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.inOut"
+                });
+            } else {
+                gsap.to(img, {
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.inOut"
+                });
+            }
+        }
+    });
+});
+
+// Skull Section Scroll Animation
+gsap.to(".skull", {
+    scale: 1.5,
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".credits__bottom",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 2
+    }
+});
+
+gsap.to(".skull-front", {
+    y: -100,
+    ease: "none",
+    scrollTrigger: {
+        trigger: ".credits__bottom",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 2
+    }
+});
+
