@@ -178,30 +178,73 @@ goonies.forEach((goonie) => {
     });
 });
 
-// Mikey Video Animation
-const mikeyGoonie = goonies[0];
+// Goonies character data
+const gooniesData = {
+    mikey: {
+        name: "Mikey",
+        img: "./assessts/goons/someone.jpg",
+        video: "./assessts/videos/one gooner.mp4",
+        desc: "When Mikey was younger, his father used to tell him various stories of grand adventure, including the story of One-Eyed Willy. Facing foreclosure of their homes in the Goon Docks, he leads his friends on a quest to find the treasure and save their homes."
+    },
+    chunk: {
+        name: "Chunk",
+        img: "./assessts/goons/sometwo.jpg",
+        video: "./assessts/videos/two gooner.mp4",
+        desc: "Chunk has previously prank called the Sheriff, claiming multiple outlandish stories and getting himself into a lot of trouble. He's also caused a lot of trouble around town, pulling pranks and causing general mischief with the people of Astoria."
+    },
+    data: {
+        name: "Data",
+        img: "./assessts/goons/somethree.jpg",
+        video: "./assessts/videos/third gooner.mp4",
+        desc: "Data and his family are preparing to move to Detroit, Michigan due to the Goon Docks planned to be sold away to Mr. Perkins. He spends the morning out, testing out an invention that reels things close to him via suction cup. It backfires though, and instead he's"
+    },
+    mouth: {
+        name: "Mouth",
+        img: "./assessts/goons/somefour.jpg",
+        video: "./assessts/videos/fourth gooner.mp4",
+        desc: "The day before the Goon Docks are to be demolished by Mr. Perkins, Mouth makes one last visit to Mikey's house. After therest of his friends arrive, they hang out; he offers to help Mikey's mother with translating for Rosalita, a maid she hired to help with the move."
+    }
+};
+
 const goonOverlay = document.querySelector(".goon-overlay");
 const goonVideo = document.querySelector(".goon-video");
 const goonClose = document.querySelector(".goon-close");
 const goonCard = document.querySelector(".goon-card");
-const otherGoonies = Array.from(goonies).slice(1);
+const goonCardName = document.querySelector(".goon-card__name");
+const goonCardImg = document.querySelector(".goon-card__img-box img");
+const goonCardDesc = document.querySelector(".goon-card__desc");
 
-if (mikeyGoonie && goonOverlay) {
-    mikeyGoonie.addEventListener("click", () => {
+let activeGoonie = null;
+
+goonies.forEach((goonie) => {
+    goonie.addEventListener("click", () => {
+        const charKey = goonie.getAttribute("data-character");
+        const charData = gooniesData[charKey];
+        if (!charData) return;
+
+        activeGoonie = goonie;
+        const otherGoonies = Array.from(goonies).filter(g => g !== goonie);
+
+        // Update card content
+        goonCardName.innerText = charData.name;
+        goonCardImg.src = charData.img;
+        goonCardDesc.innerText = charData.desc;
+        goonVideo.src = charData.video;
+
         const tl = gsap.timeline();
 
-        // 1. Expand Mikey, slide others, and fade out original image/text (Slower: 2s)
-        tl.to(mikeyGoonie, {
+        // 1. Expand clicked goonie and hide others
+        tl.to(goonie, {
             flex: 5,
             duration: 2,
             ease: "power3.inOut"
         });
-        tl.to(mikeyGoonie.querySelector(".goonie__img"), {
+        tl.to(goonie.querySelector(".goonie__img"), {
             opacity: 0,
             duration: 1.2,
             ease: "power2.inOut"
         }, 0);
-        tl.to(mikeyGoonie.querySelector(".goonie__name"), {
+        tl.to(goonie.querySelector(".goonie__name"), {
             opacity: 0,
             duration: 0.8,
             ease: "power2.inOut"
@@ -216,7 +259,7 @@ if (mikeyGoonie && goonOverlay) {
             ease: "power3.inOut"
         }, 0);
 
-        // 2. Show overlay (Slower: 1.5s)
+        // 2. Show overlay
         tl.to(goonOverlay, {
             opacity: 1,
             visibility: "visible",
@@ -229,22 +272,24 @@ if (mikeyGoonie && goonOverlay) {
             }
         }, "-=1.5");
 
-        // 3. Animate card content (Slower: 1.8s)
+        // 3. Animate card content
         tl.fromTo(goonCard,
             { y: 80, opacity: 0 },
             { y: 0, opacity: 1, duration: 1.8, ease: "power3.out" }
             , "-=1");
     });
-}
+});
 
 if (goonClose) {
     goonClose.addEventListener("click", (e) => {
         e.stopPropagation();
+        if (!activeGoonie) return;
+
+        const otherGoonies = Array.from(goonies).filter(g => g !== activeGoonie);
         const tl = gsap.timeline();
 
-        // 1. Fade out card and overlay together (Slower: 1s & 1.2s)
         tl.to(goonCard, {
-            y: 40,
+            y: 30,
             opacity: 0,
             duration: 1,
             ease: "power2.in"
@@ -253,34 +298,34 @@ if (goonClose) {
         tl.to(goonOverlay, {
             opacity: 0,
             visibility: "hidden",
-            duration: 1.2,
-            ease: "power2.inOut",
+            duration: 1.5,
+            ease: "power1.inOut",
             onComplete: () => {
                 goonOverlay.classList.remove("active");
                 goonVideo.pause();
                 goonVideo.currentTime = 0;
                 gsap.set(goonCard, { x: 0, y: 0 });
+                activeGoonie = null;
             }
-        }, "-=0.8");
+        }, "-=0.4");
 
-        // 2. Collapse Mikey and expand others (Slower: 1.8s)
-        tl.to(mikeyGoonie, {
+        tl.to(activeGoonie, {
             flex: 1,
             duration: 1.8,
             ease: "power3.inOut"
-        }, "-=0.8");
+        }, "-=1.5");
 
-        tl.to(mikeyGoonie.querySelector(".goonie__img"), {
+        tl.to(activeGoonie.querySelector(".goonie__img"), {
             opacity: 1,
             duration: 1.2,
             ease: "power2.inOut"
-        }, "-=1.8");
+        }, "-=1.5");
 
-        tl.to(mikeyGoonie.querySelector(".goonie__name"), {
+        tl.to(activeGoonie.querySelector(".goonie__name"), {
             opacity: 1,
             duration: 1.2,
             ease: "power2.inOut"
-        }, "-=1.8");
+        }, "-=1.5");
 
         tl.to(otherGoonies, {
             flex: 1,
