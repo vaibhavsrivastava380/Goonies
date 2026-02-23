@@ -1,4 +1,43 @@
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Draggable);
+
+// Initialize Draggable for the card
+Draggable.create(".goon-card", {
+    type: "x,y",
+    edgeResistance: 0.65,
+    bounds: ".goon-overlay",
+    inertia: true
+});
+
+// Loader Animation
+const loaderTimeline = gsap.timeline({
+    onComplete: () => {
+        gsap.to(".loader", {
+            y: "-100%",
+            duration: 1.2,
+            ease: "power4.inOut",
+            onComplete: () => {
+                document.querySelector(".loader").style.display = "none";
+            }
+        });
+    }
+});
+
+let obj = { value: 0 };
+loaderTimeline.to(obj, {
+    value: 100,
+    duration: 3.5,
+    ease: "power1.inOut",
+    onUpdate: () => {
+        document.querySelector(".loader__count").textContent = Math.round(obj.value) + "%";
+    }
+}, 0);
+
+loaderTimeline.to(".loader__bg", {
+    height: "100%",
+    duration: 3.5,
+    ease: "power1.inOut"
+}, 0);
+
 
 // Hero Scroll Animation
 const heroTimeline = gsap.timeline({
@@ -100,7 +139,7 @@ goonies.forEach((goonie) => {
         gsap.to(img, {
             filter: "brightness(1)",
             scale: 1.1,
-            duration: 0.6,
+            duration: 0.9,
             ease: "power2.out"
         });
         gsap.to(nameText, {
@@ -138,6 +177,166 @@ goonies.forEach((goonie) => {
         });
     });
 });
+
+// Goonies character data
+const gooniesData = {
+    mikey: {
+        name: "Mikey",
+        img: "./assessts/goons/someone.jpg",
+        video: "./assessts/videos/one gooner.mp4",
+        desc: "When Mikey was younger, his father used to tell him various stories of grand adventure, including the story of One-Eyed Willy. Facing foreclosure of their homes in the Goon Docks, he leads his friends on a quest to find the treasure and save their homes."
+    },
+    chunk: {
+        name: "Chunk",
+        img: "./assessts/goons/sometwo.jpg",
+        video: "./assessts/videos/two gooner.mp4",
+        desc: "Chunk has previously prank called the Sheriff, claiming multiple outlandish stories and getting himself into a lot of trouble. He's also caused a lot of trouble around town, pulling pranks and causing general mischief with the people of Astoria."
+    },
+    data: {
+        name: "Data",
+        img: "./assessts/goons/somethree.jpg",
+        video: "./assessts/videos/third gooner.mp4",
+        desc: "Data and his family are preparing to move to Detroit, Michigan due to the Goon Docks planned to be sold away to Mr. Perkins. He spends the morning out, testing out an invention that reels things close to him via suction cup. It backfires though, and instead he's"
+    },
+    mouth: {
+        name: "Mouth",
+        img: "./assessts/goons/somefour.jpg",
+        video: "./assessts/videos/fourth gooner.mp4",
+        desc: "The day before the Goon Docks are to be demolished by Mr. Perkins, Mouth makes one last visit to Mikey's house. After therest of his friends arrive, they hang out; he offers to help Mikey's mother with translating for Rosalita, a maid she hired to help with the move."
+    }
+};
+
+const goonOverlay = document.querySelector(".goon-overlay");
+const goonVideo = document.querySelector(".goon-video");
+const goonClose = document.querySelector(".goon-close");
+const goonCard = document.querySelector(".goon-card");
+const goonCardName = document.querySelector(".goon-card__name");
+const goonCardImg = document.querySelector(".goon-card__img-box img");
+const goonCardDesc = document.querySelector(".goon-card__desc");
+
+let activeGoonie = null;
+
+goonies.forEach((goonie) => {
+    goonie.addEventListener("click", () => {
+        const charKey = goonie.getAttribute("data-character");
+        const charData = gooniesData[charKey];
+        if (!charData) return;
+
+        activeGoonie = goonie;
+        const otherGoonies = Array.from(goonies).filter(g => g !== goonie);
+
+        // Update card content
+        goonCardName.innerText = charData.name;
+        goonCardImg.src = charData.img;
+        goonCardDesc.innerText = charData.desc;
+        goonVideo.src = charData.video;
+
+        const tl = gsap.timeline();
+
+        // 1. Expand clicked goonie and hide others
+        tl.to(goonie, {
+            flex: 5,
+            duration: 2,
+            ease: "power3.inOut"
+        });
+        tl.to(goonie.querySelector(".goonie__img"), {
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, 0);
+        tl.to(goonie.querySelector(".goonie__name"), {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.inOut"
+        }, 0);
+        tl.to(otherGoonies, {
+            flex: 0,
+            padding: 0,
+            margin: 0,
+            opacity: 0,
+            pointerEvents: "none",
+            duration: 2,
+            ease: "power3.inOut"
+        }, 0);
+
+        // 2. Show overlay
+        tl.to(goonOverlay, {
+            opacity: 1,
+            visibility: "visible",
+            pointerEvents: "all",
+            duration: 1.5,
+            ease: "power2.inOut",
+            onStart: () => {
+                goonOverlay.classList.add("active");
+                goonVideo.play();
+            }
+        }, "-=1.5");
+
+        // 3. Animate card content
+        tl.fromTo(goonCard,
+            { y: 80, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.8, ease: "power3.out" }
+            , "-=1");
+    });
+});
+
+if (goonClose) {
+    goonClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!activeGoonie) return;
+
+        const otherGoonies = Array.from(goonies).filter(g => g !== activeGoonie);
+        const tl = gsap.timeline();
+
+        tl.to(goonCard, {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.in"
+        });
+
+        tl.to(goonOverlay, {
+            opacity: 0,
+            visibility: "hidden",
+            duration: 1.5,
+            ease: "power1.inOut",
+            onComplete: () => {
+                goonOverlay.classList.remove("active");
+                goonVideo.pause();
+                goonVideo.currentTime = 0;
+                gsap.set(goonCard, { x: 0, y: 0 });
+                activeGoonie = null;
+            }
+        }, "-=0.4");
+
+        tl.to(activeGoonie, {
+            flex: 1,
+            duration: 1.8,
+            ease: "power3.inOut"
+        }, "-=1.5");
+
+        tl.to(activeGoonie.querySelector(".goonie__img"), {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, "-=1.5");
+
+        tl.to(activeGoonie.querySelector(".goonie__name"), {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, "-=1.5");
+
+        tl.to(otherGoonies, {
+            flex: 1,
+            opacity: 1,
+            pointerEvents: "all",
+            duration: 1.8,
+            ease: "power3.inOut"
+        }, "-=1.8");
+    });
+}
+
 
 
 
@@ -355,14 +554,14 @@ masterNavTL
 const backToTopBtn = document.querySelector(".share__back-to-top");
 
 
-    backToTopBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        gsap.to(window, {
-            duration: 7,
-            scrollTo: 0,
-            ease: "power2.inOut"
-        });
+backToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    gsap.to(window, {
+        duration: 7,
+        scrollTo: 0,
+        ease: "power2.inOut"
     });
+});
 
 
 

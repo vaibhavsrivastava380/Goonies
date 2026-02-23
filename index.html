@@ -15,6 +15,18 @@
 </head>
 
 <body>
+    <!-- 
+    <div class="loader">
+        <div class="loader__bg"></div>
+        <div class="loader__content">
+            <span class="loader__count">0%</span>
+            <div class="loader__text">
+                <p>Loading</p>
+                <span class="loader__dot"></span>
+            </div>
+        </div>
+    </div> -->
+
 
 
     <header class="header">
@@ -73,7 +85,7 @@
 
     <section class="goonies" id="goonies">
         <div class="goonies-box">
-            <div class="goonie">
+            <div class="goonie" data-character="mikey">
                 <img class="goonie__img" src="./assessts/goons/someone.jpg" alt="Mikey">
                 <div class="goonie__name">
                     <p class="goonie__name__text">Mikey</p>
@@ -83,7 +95,7 @@
                     </p>
                 </div>
             </div>
-            <div class="goonie">
+            <div class="goonie" data-character="chunk">
                 <img class="goonie__img" src="./assessts/goons/sometwo.jpg" alt="chunk">
                 <div class="goonie__name">
                     <p class="goonie__name__text">chunk</p>
@@ -93,7 +105,7 @@
                     </p>
                 </div>
             </div>
-            <div class="goonie">
+            <div class="goonie" data-character="data">
                 <img class="goonie__img" src="./assessts/goons/somethree.jpg" alt="Data">
                 <div class="goonie__name">
                     <p class="goonie__name__text">Data</p>
@@ -103,7 +115,7 @@
                     </p>
                 </div>
             </div>
-            <div class="goonie">
+            <div class="goonie" data-character="mouth">
                 <img class="goonie__img" src="./assessts/goons/somefour.jpg" alt="Mouth">
                 <div class="goonie__name">
                     <p class="goonie__name__text">Mouth</p>
@@ -111,6 +123,38 @@
                         More Info
                         <img class="goonie__arrow" src="./assessts/credits/arrow-right.png" alt="arrow right">
                     </p>
+                </div>
+            </div>
+        </div>
+        <div class="goon-overlay">
+            <video class="goon-video" loop muted playsinline>
+                <source src="./assessts/videos/one gooner.mp4" type="video/mp4">
+            </video>
+            <div class="goon-detail">
+                <button class="goon-close">Close Video</button>
+                <div class="goon-card">
+                    <img src="./assessts/goons/full.png" class="goon-card__icon" alt="expand icon">
+                    <div class="goon-card__scroll-box">
+                        <div class="goon-card__header">
+                            <div class="goon-card__img-box">
+                                <img src="./assessts/goons/someone.jpg" alt="Mikey">
+                            </div>
+                            <h2 class="goon-card__name">Mikey</h2>
+                        </div>
+                        <p class="goon-card__desc">
+                            When Mikey was younger, his father used to tell him various stories of grand adventure,
+                            including the story of One-Eyed Willy.
+                        </p>
+                        <p class="goon-card__desc">
+                            Facing foreclosure of their homes in the Goon Docks area of Astoria, Oregon to an expanding
+                            country club, a group of children who call themselves "the Goonies" gather for a final
+                            weekend together.
+                        </p>
+                        <p class="goon-card__desc">
+                            The adventure takes them through underground tunnels, past booby traps, and into the path of
+                            the Fratellis, a family of criminals who are also after the treasure.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,6 +282,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/Draggable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollToPlugin.min.js"></script>
     <script src="./js/script.js"></script>
