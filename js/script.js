@@ -1,4 +1,43 @@
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, Draggable);
+
+// Initialize Draggable for the card
+Draggable.create(".goon-card", {
+    type: "x,y",
+    edgeResistance: 0.65,
+    bounds: ".goon-overlay",
+    inertia: true
+});
+
+// Loader Animation
+const loaderTimeline = gsap.timeline({
+    onComplete: () => {
+        gsap.to(".loader", {
+            y: "-100%",
+            duration: 1.2,
+            ease: "power4.inOut",
+            onComplete: () => {
+                document.querySelector(".loader").style.display = "none";
+            }
+        });
+    }
+});
+
+let obj = { value: 0 };
+loaderTimeline.to(obj, {
+    value: 100,
+    duration: 3.5,
+    ease: "power1.inOut",
+    onUpdate: () => {
+        document.querySelector(".loader__count").textContent = Math.round(obj.value) + "%";
+    }
+}, 0);
+
+loaderTimeline.to(".loader__bg", {
+    height: "100%",
+    duration: 3.5,
+    ease: "power1.inOut"
+}, 0);
+
 
 // Hero Scroll Animation
 const heroTimeline = gsap.timeline({
@@ -100,7 +139,7 @@ goonies.forEach((goonie) => {
         gsap.to(img, {
             filter: "brightness(1)",
             scale: 1.1,
-            duration: 0.6,
+            duration: 0.9,
             ease: "power2.out"
         });
         gsap.to(nameText, {
@@ -138,6 +177,121 @@ goonies.forEach((goonie) => {
         });
     });
 });
+
+// Mikey Video Animation
+const mikeyGoonie = goonies[0];
+const goonOverlay = document.querySelector(".goon-overlay");
+const goonVideo = document.querySelector(".goon-video");
+const goonClose = document.querySelector(".goon-close");
+const goonCard = document.querySelector(".goon-card");
+const otherGoonies = Array.from(goonies).slice(1);
+
+if (mikeyGoonie && goonOverlay) {
+    mikeyGoonie.addEventListener("click", () => {
+        const tl = gsap.timeline();
+
+        // 1. Expand Mikey, slide others, and fade out original image/text (Slower: 2s)
+        tl.to(mikeyGoonie, {
+            flex: 5,
+            duration: 2,
+            ease: "power3.inOut"
+        });
+        tl.to(mikeyGoonie.querySelector(".goonie__img"), {
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, 0);
+        tl.to(mikeyGoonie.querySelector(".goonie__name"), {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.inOut"
+        }, 0);
+        tl.to(otherGoonies, {
+            flex: 0,
+            padding: 0,
+            margin: 0,
+            opacity: 0,
+            pointerEvents: "none",
+            duration: 2,
+            ease: "power3.inOut"
+        }, 0);
+
+        // 2. Show overlay (Slower: 1.5s)
+        tl.to(goonOverlay, {
+            opacity: 1,
+            visibility: "visible",
+            pointerEvents: "all",
+            duration: 1.5,
+            ease: "power2.inOut",
+            onStart: () => {
+                goonOverlay.classList.add("active");
+                goonVideo.play();
+            }
+        }, "-=1.5");
+
+        // 3. Animate card content (Slower: 1.8s)
+        tl.fromTo(goonCard,
+            { y: 80, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.8, ease: "power3.out" }
+            , "-=1");
+    });
+}
+
+if (goonClose) {
+    goonClose.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const tl = gsap.timeline();
+
+        // 1. Fade out card and overlay together (Slower: 1s & 1.2s)
+        tl.to(goonCard, {
+            y: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.in"
+        });
+
+        tl.to(goonOverlay, {
+            opacity: 0,
+            visibility: "hidden",
+            duration: 1.2,
+            ease: "power2.inOut",
+            onComplete: () => {
+                goonOverlay.classList.remove("active");
+                goonVideo.pause();
+                goonVideo.currentTime = 0;
+                gsap.set(goonCard, { x: 0, y: 0 });
+            }
+        }, "-=0.8");
+
+        // 2. Collapse Mikey and expand others (Slower: 1.8s)
+        tl.to(mikeyGoonie, {
+            flex: 1,
+            duration: 1.8,
+            ease: "power3.inOut"
+        }, "-=0.8");
+
+        tl.to(mikeyGoonie.querySelector(".goonie__img"), {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, "-=1.8");
+
+        tl.to(mikeyGoonie.querySelector(".goonie__name"), {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.inOut"
+        }, "-=1.8");
+
+        tl.to(otherGoonies, {
+            flex: 1,
+            opacity: 1,
+            pointerEvents: "all",
+            duration: 1.8,
+            ease: "power3.inOut"
+        }, "-=1.8");
+    });
+}
+
 
 
 
@@ -355,14 +509,14 @@ masterNavTL
 const backToTopBtn = document.querySelector(".share__back-to-top");
 
 
-    backToTopBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        gsap.to(window, {
-            duration: 7,
-            scrollTo: 0,
-            ease: "power2.inOut"
-        });
+backToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    gsap.to(window, {
+        duration: 7,
+        scrollTo: 0,
+        ease: "power2.inOut"
     });
+});
 
 
 
