@@ -47,6 +47,71 @@
   border: 0;
 }
 
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #333;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.loader__bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: #000;
+}
+.loader__content {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.loader__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.loader__text p {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.loader__dot {
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+.loader__count {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
 .header {
   z-index: 999;
   height: 15%;
@@ -374,6 +439,138 @@
   bottom: 25%;
   right: 20%;
 }
+.goonies .goon-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20000;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.goonies .goon-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+.goonies .goon-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.goonies .goon-detail {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.goonies .goon-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 20;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+.goonies .goon-close:hover {
+  background: #fff;
+  color: #000;
+}
+.goonies .goon-card {
+  position: relative;
+  background-color: #000;
+  width: clamp(320px, 35vw, 320px);
+  max-height: 50vh;
+  padding: 2rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
+  cursor: grab;
+}
+.goonies .goon-card:active {
+  cursor: grabbing;
+}
+.goonies .goon-card__icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 15px;
+  height: auto;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.goonies .goon-card__scroll-box {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+}
+.goonies .goon-card__scroll-box::-webkit-scrollbar {
+  width: 3px;
+  display: none;
+}
+.goonies .goon-card__scroll-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.goonies .goon-card__scroll-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.goonies .goon-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.4rem;
+  flex-shrink: 0;
+}
+.goonies .goon-card__img-box {
+  width: 180px;
+  height: 170px;
+  overflow: hidden;
+}
+.goonies .goon-card__img-box img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  transform: scale(1.1);
+}
+.goonies .goon-card__name {
+  font-family: "SharpGroteskBook", sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+}
+.goonies .goon-card__desc {
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
 
 .credits {
   background-color: #000;
@@ -593,4 +790,6 @@
   font-weight: 600;
   letter-spacing: 1px;
   opacity: 0.6;
-}/*# sourceMappingURL=main.css.map */
+}
+
+/*# sourceMappingURL=main.css.map */
