@@ -40,11 +40,18 @@
   font-style: normal;
   font-display: swap;
 }
-* {
+*,
+*::before,
+*::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  border: 0;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 .loader {
@@ -122,6 +129,13 @@
   padding-top: 2%;
   padding-bottom: 2%;
 }
+@media only screen and (max-width: 56.25em) {
+  .header {
+    height: 10%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
 .header .nav-bar {
   display: flex;
   height: 50%;
@@ -150,6 +164,11 @@
   text-decoration: none;
   margin-bottom: 5px;
 }
+@media only screen and (max-width: 37.5em) {
+  .header .nav-bar .nav-box .nav-item {
+    font-size: 11px;
+  }
+}
 .header .nav-bar .nav-indicator {
   position: absolute;
   bottom: -6px;
@@ -160,6 +179,13 @@
   background-color: #fff;
   border-radius: 50%;
   z-index: 10;
+}
+@media only screen and (max-width: 37.5em) {
+  .header .nav-bar .nav-indicator {
+    height: 5px;
+    width: 5px;
+    bottom: -4px;
+  }
 }
 
 .audio-control {
@@ -244,8 +270,8 @@
   justify-content: center;
 }
 .hero-box .hero-title__up {
-  font-family: "SharpGroteskBook", sans-serif;
-  font-size: 14px;
+  font-family: "Abuget", cursive;
+  font-size: 44px;
   color: #fff;
   text-decoration: none;
 }
@@ -255,9 +281,28 @@
   width: 35vw;
 }
 .hero-box .hero-title__down__img {
-  width: 100%;
+  padding-left: 10%;
+  width: 90%;
   height: 100%;
   object-fit: contain;
+}
+@media only screen and (max-width: 37.5em) {
+  .hero-box .hero-title__down {
+    height: 30vh;
+    width: 50vw;
+  }
+  .hero-box .hero-title__down__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .hero-box .hero-title {
+    height: 30vh;
+    width: 70vh;
+    bottom: -4px;
+  }
 }
 .hero-box .hero-cursor {
   position: absolute;
@@ -327,11 +372,22 @@
   width: 100%;
   background-color: #000;
 }
+@media only screen and (max-width: 56.25em) {
+  .goonies {
+    height: auto;
+  }
+}
 .goonies-box {
   height: 100vh;
   width: 100%;
   display: flex;
   overflow: hidden;
+}
+@media only screen and (max-width: 56.25em) {
+  .goonies-box {
+    flex-direction: column;
+    height: auto;
+  }
 }
 .goonies-box .goonie {
   position: relative;
@@ -342,11 +398,18 @@
   cursor: pointer;
   overflow: hidden;
 }
+@media only screen and (max-width: 56.25em) {
+  .goonies-box .goonie {
+    height: 40vh;
+    width: 100%;
+    flex: none;
+  }
+}
 .goonies-box .goonie::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 30%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 30%);
   z-index: 1;
 }
 .goonies-box .goonie__img {
@@ -367,11 +430,23 @@
   width: 100%;
   pointer-events: none;
 }
+@media only screen and (max-width: 56.25em) {
+  .goonies-box .goonie__name {
+    left: 0;
+    bottom: 10%;
+  }
+}
 .goonies-box .goonie__name__text {
   font-family: "SharpGroteskBook", sans-serif;
   font-size: 22px;
   color: #fff;
   opacity: 0;
+}
+@media only screen and (max-width: 56.25em) {
+  .goonies-box .goonie__name__text {
+    opacity: 1;
+    transform: translateY(0) !important;
+  }
 }
 .goonies-box .goonie__name__showmore {
   font-family: "Montserrat", sans-serif;
@@ -383,6 +458,12 @@
   gap: 10px;
   letter-spacing: 1px;
   opacity: 0;
+}
+@media only screen and (max-width: 56.25em) {
+  .goonies-box .goonie__name__showmore {
+    opacity: 1;
+    transform: translateY(0) !important;
+  }
 }
 .goonies-box .goonie__arrow {
   width: 10px;
@@ -399,6 +480,11 @@
   align-items: center;
   justify-content: center;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins {
+    height: 70vh;
+  }
+}
 .goonies-coins .coint__text {
   font-family: "SharpGroteskBook", sans-serif;
   font-size: 2rem;
@@ -407,6 +493,11 @@
   z-index: 10;
   pointer-events: none;
   white-space: nowrap;
+}
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coint__text {
+    font-size: 1.2rem;
+  }
 }
 .goonies-coins img {
   position: absolute;
@@ -420,25 +511,50 @@
   transform: translate(-50%, -50%);
   rotate: 10deg;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coin-big {
+    width: 100px;
+  }
+}
 .goonies-coins .coin-1 {
   width: 100px;
   top: 10%;
   left: 15%;
+}
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coin-1 {
+    width: 60px;
+  }
 }
 .goonies-coins .coin-2 {
   width: 80px;
   top: 20%;
   right: 20%;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coin-2 {
+    width: 50px;
+  }
+}
 .goonies-coins .coin-3 {
   width: 120px;
   bottom: 15%;
   left: 27%;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coin-3 {
+    width: 70px;
+  }
+}
 .goonies-coins .coin-4 {
   width: 90px;
   bottom: 25%;
   right: 20%;
+}
+@media only screen and (max-width: 37.5em) {
+  .goonies-coins .coin-4 {
+    width: 60px;
+  }
 }
 .goonies .goon-overlay {
   position: fixed;
@@ -492,6 +608,14 @@
   transition: all 0.3s ease;
   pointer-events: auto;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies .goon-close {
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    font-size: 10px;
+  }
+}
 .goonies .goon-close:hover {
   background: #fff;
   color: #000;
@@ -499,8 +623,8 @@
 .goonies .goon-card {
   position: relative;
   background-color: #000;
-  width: clamp(320px, 35vw, 320px);
-  max-height: 50vh;
+  width: clamp(300px, 35vw, 320px);
+  max-height: 70vh;
   padding: 2rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -508,6 +632,12 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   pointer-events: auto;
   cursor: grab;
+}
+@media only screen and (max-width: 37.5em) {
+  .goonies .goon-card {
+    width: 85%;
+    padding: 1.5rem 1rem 1rem;
+  }
 }
 .goonies .goon-card:active {
   cursor: grabbing;
@@ -553,6 +683,12 @@
   height: 170px;
   overflow: hidden;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies .goon-card__img-box {
+    width: 140px;
+    height: 130px;
+  }
+}
 .goonies .goon-card__img-box img {
   width: 100%;
   height: 70%;
@@ -566,11 +702,21 @@
   margin: 0;
   line-height: 1;
 }
+@media only screen and (max-width: 37.5em) {
+  .goonies .goon-card__name {
+    font-size: 2.2rem;
+  }
+}
 .goonies .goon-card__desc {
   font-family: "Montserrat", sans-serif;
   font-size: 15px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.7);
+}
+@media only screen and (max-width: 37.5em) {
+  .goonies .goon-card__desc {
+    font-size: 13px;
+  }
 }
 
 .credits {
@@ -599,6 +745,19 @@
   background-color: transparent;
   width: 25%;
 }
+@media only screen and (max-width: 56.25em) {
+  .credits__top > div {
+    width: 50% !important;
+    height: 40vh;
+    padding: 1.5rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .credits__top > div {
+    width: 100% !important;
+    height: 35vh;
+  }
+}
 .credits__top > div:nth-child(1), .credits__top > div:nth-child(2) {
   width: 25%;
 }
@@ -622,6 +781,11 @@
   color: #fff;
   z-index: 10;
   pointer-events: none;
+}
+@media only screen and (max-width: 37.5em) {
+  .credits__top > div .card__text {
+    font-size: 1.8rem;
+  }
 }
 .credits__top > div .card__img {
   position: absolute;
@@ -678,12 +842,22 @@
   letter-spacing: -0.5px;
   line-height: 1.1;
 }
+@media only screen and (max-width: 37.5em) {
+  .credits__top > div .card__bottom_up {
+    font-size: 0.9rem;
+  }
+}
 .credits__top > div .card__bottom_down {
   font-family: "Montserrat", sans-serif;
   font-size: 0.85rem;
   color: #fff;
   letter-spacing: 0.2px;
   font-weight: 500;
+}
+@media only screen and (max-width: 37.5em) {
+  .credits__top > div .card__bottom_down {
+    font-size: 0.75rem;
+  }
 }
 .credits__bottom {
   min-height: 100vh;
@@ -695,6 +869,11 @@
   background-color: #000;
   padding: 5rem 0;
 }
+@media only screen and (max-width: 56.25em) {
+  .credits__bottom {
+    min-height: 70vh;
+  }
+}
 .credits__bottom .skull {
   width: 20%;
   max-width: 900px;
@@ -702,6 +881,16 @@
   object-fit: contain;
   filter: brightness(0.3);
   z-index: 1;
+}
+@media only screen and (max-width: 56.25em) {
+  .credits__bottom .skull {
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .credits__bottom .skull {
+    width: 60%;
+  }
 }
 .credits__bottom .skull-front {
   position: absolute;
@@ -715,6 +904,13 @@
   pointer-events: none;
   opacity: 0.8;
 }
+@media only screen and (max-width: 56.25em) {
+  .credits__bottom .skull-front {
+    width: 80%;
+    height: 50%;
+    bottom: -10%;
+  }
+}
 
 .gallery {
   height: 100vh;
@@ -726,6 +922,23 @@
   position: relative;
   gap: 0.3rem;
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    height: auto;
+    min-height: 100vh;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .gallery_underlay {
   height: 100vh;
   width: 100%;
@@ -736,6 +949,11 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   z-index: 0;
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery_underlay {
+    display: none;
+  }
 }
 .gallery_underlay_box {
   height: 100vh;
@@ -749,14 +967,24 @@
   top: 40%;
   display: flex;
   flex-direction: column;
-  z-index: 1;
+  z-index: 10;
   cursor: pointer;
   gap: 0.5rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__details {
+    top: 20%;
+  }
 }
 .gallery__details--title {
   color: #fff;
   font-size: 2rem;
   font-family: "SharpGroteskBook", sans-serif;
+}
+@media only screen and (max-width: 37.5em) {
+  .gallery__details--title {
+    font-size: 1.5rem;
+  }
 }
 .gallery__details--button {
   border: 0;
@@ -820,11 +1048,23 @@
   background-position: 50% 50%;
   background-size: cover;
 }
+@media only screen and (max-width: 37.5em) {
+  .gallery__image {
+    height: 30vh;
+    width: 100%;
+  }
+}
 .gallery__one {
   grid-column: 1/4;
   grid-row: 1/3;
   transform: scale(0.2, 0.2);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa2ab90c75d6f44a8e_the-goonies.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__one {
+    grid-column: 1/3;
+    grid-row: 1/3;
+  }
 }
 .gallery__two {
   grid-column: 4/5;
@@ -832,11 +1072,25 @@
   transform: scale(0.4, 0.4) translateX(-35rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa2b24d9ce77182467_goonies-tongue.jpg");
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery__two {
+    grid-column: 3/5;
+    grid-row: 1/3;
+    transform: scale(0.4, 0.4);
+  }
+}
 .gallery__three {
   grid-column: 5/6;
   grid-row: 1/2;
   transform: translateY(8.75rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa0369a41028d539d0_the-goonies-cave.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__three {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    transform: translateY(0);
+  }
 }
 .gallery__four {
   grid-column: 6/9;
@@ -844,11 +1098,25 @@
   transform: scale(0.7, 0.7) translateY(12rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b9359641a587dc58ecb84_Goonies-Captain-Chunk.jpg");
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery__four {
+    grid-column: 3/5;
+    grid-row: 3/5;
+    transform: scale(0.7, 0.7);
+  }
+}
 .gallery__five {
   grid-column: 5/6;
   grid-row: 2/3;
   transform: scale(0.8, 0.8) translate(-5.5rem, -3.5rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d23a6ca059b4b229b659eb7_rocks-min.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__five {
+    grid-column: 1/2;
+    grid-row: 4/5;
+    transform: scale(0.8, 0.8);
+  }
 }
 .gallery__six {
   grid-column: 1/3;
@@ -856,11 +1124,24 @@
   transform: scale(0.6, 0.6) translateX(24.5rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa641a584b528ebed3_20141201-125621.jpg");
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery__six {
+    grid-column: 2/5;
+    grid-row: 5/7;
+    transform: scale(0.6, 0.6);
+  }
+}
 .gallery__seven {
   grid-column: 3/6;
   grid-row: 3/8;
   transform: scale(0.5, 0.5);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa641a58fc3a8ebed4_goonies_lead.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__seven {
+    grid-column: 1/4;
+    grid-row: 7/10;
+  }
 }
 .gallery__eight {
   grid-column: 6/9;
@@ -868,11 +1149,23 @@
   transform: scale(0.4, 0.4);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b93722b24d9f866182ebb_goonies4.jpg");
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery__eight {
+    grid-column: 4/5;
+    grid-row: 7/11;
+  }
+}
 .gallery__nine {
   grid-column: 1/3;
   grid-row: 5/8;
   transform: scale(0.2, 0.2);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b938f2ab90c1171f45523_image.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__nine {
+    grid-column: 1/2;
+    grid-row: 10/11;
+  }
 }
 .gallery__ten {
   grid-column: 6/7;
@@ -880,11 +1173,24 @@
   transform: translateY(-5rem);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b94f92ddabc77c98253ce_josh-brolin-recounts-seeing-the-pirate-ship-in-the-goonies-for-the-first-time-and-how-he-ruined-the-first-take-social.jpg");
 }
+@media only screen and (max-width: 56.25em) {
+  .gallery__ten {
+    grid-column: 2/3;
+    grid-row: 10/11;
+    transform: translateY(0);
+  }
+}
 .gallery__eleven {
   grid-column: 7/9;
   grid-row: 7/8;
   transform: scale(0.6, 0.6);
   background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0bcacdefd94731f3b15073_The-Goonies-Lost-Treasure-and-Maritime-Law-720x340.jpg");
+}
+@media only screen and (max-width: 56.25em) {
+  .gallery__eleven {
+    grid-column: 3/4;
+    grid-row: 10/11;
+  }
 }
 
 .share {
@@ -923,6 +1229,11 @@
   letter-spacing: 0.5px;
   opacity: 0.8;
 }
+@media only screen and (max-width: 37.5em) {
+  .share__text {
+    font-size: 0.7rem;
+  }
+}
 .share__url {
   font-family: "SharpGroteskBook", sans-serif;
   font-size: 2rem;
@@ -930,6 +1241,11 @@
   letter-spacing: 2px;
   line-height: 1;
   cursor: pointer;
+}
+@media only screen and (max-width: 37.5em) {
+  .share__url {
+    font-size: 1.4rem;
+  }
 }
 .share__back-to-top {
   font-family: "SharpGroteskBook", sans-serif;
@@ -941,6 +1257,11 @@
   padding-bottom: 5px;
   margin-top: 1rem;
   transition: border-bottom 0.3s ease;
+}
+@media only screen and (max-width: 37.5em) {
+  .share__back-to-top {
+    font-size: 0.8rem;
+  }
 }
 .share__footer {
   position: absolute;
@@ -956,4 +1277,9 @@
   font-weight: 600;
   letter-spacing: 1px;
   opacity: 0.6;
+}
+@media only screen and (max-width: 37.5em) {
+  .share__footer p {
+    font-size: 0.6rem;
+  }
 }/*# sourceMappingURL=main.css.map */
