@@ -1,3 +1,6 @@
+@import '../abstract/variables';
+@import '../abstract/mixins';
+
 .credits {
     background-color: $color-black;
     width: 100%;
@@ -9,13 +12,13 @@
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid $color-white-trans-1;
 
         &>div {
             position: relative;
             height: 50vh;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid $color-white-trans-1;
+            border-bottom: 1px solid $color-white-trans-1;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -23,6 +26,17 @@
             overflow: hidden;
             background-color: transparent;
             width: 25%;
+
+            @include respond(tab-port) {
+                width: 50% !important;
+                height: 40vh;
+                padding: 1.5rem;
+            }
+
+            @include respond(phone) {
+                width: 100% !important;
+                height: 35vh;
+            }
 
             &:nth-child(1),
             &:nth-child(2) {
@@ -52,6 +66,10 @@
                 color: $color-white;
                 z-index: 10;
                 pointer-events: none;
+
+                @include respond(phone) {
+                    font-size: 1.8rem;
+                }
             }
 
             .card__img {
@@ -123,6 +141,10 @@
                     color: $color-white;
                     letter-spacing: -0.5px;
                     line-height: 1.1;
+
+                    @include respond(phone) {
+                        font-size: 0.9rem;
+                    }
                 }
 
                 &_down {
@@ -131,6 +153,10 @@
                     color: $color-white;
                     letter-spacing: 0.2px;
                     font-weight: 500;
+
+                    @include respond(phone) {
+                        font-size: 0.75rem;
+                    }
                 }
             }
         }
@@ -146,6 +172,10 @@
         background-color: $color-black;
         padding: 5rem 0;
 
+        @include respond(tab-port) {
+            min-height: 70vh;
+        }
+
         .skull {
             width: 20%;
             max-width: 900px;
@@ -153,6 +183,14 @@
             object-fit: contain;
             filter: brightness(0.3);
             z-index: 1;
+
+            @include respond(tab-port) {
+                width: 40%;
+            }
+
+            @include respond(phone) {
+                width: 60%;
+            }
         }
 
         .skull-front {
@@ -166,6 +204,12 @@
             z-index: 2;
             pointer-events: none;
             opacity: 0.8;
+
+            @include respond(tab-port) {
+                width: 80%;
+                height: 50%;
+                bottom: -10%;
+            }
         }
     }
 }
