@@ -1,3 +1,6 @@
+@import '../abstract/variables';
+@import '../abstract/mixins';
+
 .gallery {
     height: 100vh;
     width: 100%;
@@ -8,21 +11,40 @@
     position: relative;
     gap: 0.3rem;
 
+    @include respond(tab-port) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        height: auto;
+        min-height: 100vh;
+    }
+
+    @include respond(phone) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
     &_underlay {
         height: 100vh;
         width: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: $color-black-trans-5-alt; // Created for 0.5 opacity as well
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         z-index: 0;
 
+        @include respond(tab-port) {
+            display: none;
+        }
+
         &_box {
             height: 100vh;
             width: 100%;
-            border: 0.7px solid rgba(255, 255, 255, 0.1);
+            border: 0.7px solid $color-white-trans-1;
         }
     }
 
@@ -33,14 +55,22 @@
         top: 40%;
         display: flex;
         flex-direction: column;
-        z-index: 1;
+        z-index: 10;
         cursor: pointer;
         gap: 0.5rem;
+
+        @include respond(tab-port) {
+            top: 20%;
+        }
 
         &--title {
             color: $white;
             font-size: 2rem;
             font-family: $font-sharp;
+
+            @include respond(phone) {
+                font-size: 1.5rem;
+            }
         }
 
         &--button {
@@ -112,6 +142,11 @@
     &__image {
         background-position: 50% 50%;
         background-size: cover;
+
+        @include respond(phone) {
+            height: 30vh;
+            width: 100%;
+        }
     }
 
     &__one {
@@ -119,6 +154,11 @@
         grid-row: 1/3;
         transform: scale(0.2, 0.2);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa2ab90c75d6f44a8e_the-goonies.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 1/3;
+            grid-row: 1/3;
+        }
     }
 
     &__two {
@@ -126,6 +166,12 @@
         grid-row: 1/3;
         transform: scale(0.4, 0.4) translateX(-35rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa2b24d9ce77182467_goonies-tongue.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 3/5;
+            grid-row: 1/3;
+            transform: scale(0.4, 0.4);
+        }
     }
 
     &__three {
@@ -133,6 +179,12 @@
         grid-row: 1/2;
         transform: translateY(8.75rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa0369a41028d539d0_the-goonies-cave.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 1/3;
+            grid-row: 3/4;
+            transform: translateY(0);
+        }
     }
 
     &__four {
@@ -140,6 +192,12 @@
         grid-row: 1/3;
         transform: scale(0.7, 0.7) translateY(12rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b9359641a587dc58ecb84_Goonies-Captain-Chunk.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 3/5;
+            grid-row: 3/5;
+            transform: scale(0.7, 0.7);
+        }
     }
 
     &__five {
@@ -147,6 +205,12 @@
         grid-row: 2/3;
         transform: scale(0.8, 0.8) translate(-5.5rem, -3.5rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d23a6ca059b4b229b659eb7_rocks-min.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 1/2;
+            grid-row: 4/5;
+            transform: scale(0.8, 0.8);
+        }
     }
 
     &__six {
@@ -154,6 +218,12 @@
         grid-row: 3/5;
         transform: scale(0.6, 0.6) translateX(24.5rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa641a584b528ebed3_20141201-125621.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 2/5;
+            grid-row: 5/7;
+            transform: scale(0.6, 0.6);
+        }
     }
 
     &__seven {
@@ -161,6 +231,11 @@
         grid-row: 3/8;
         transform: scale(0.5, 0.5);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b90fa641a58fc3a8ebed4_goonies_lead.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 1/4;
+            grid-row: 7/10;
+        }
     }
 
     &__eight {
@@ -168,6 +243,11 @@
         grid-row: 3/7;
         transform: scale(0.4, 0.4);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b93722b24d9f866182ebb_goonies4.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 4/5;
+            grid-row: 7/11;
+        }
     }
 
     &__nine {
@@ -175,6 +255,11 @@
         grid-row: 5/8;
         transform: scale(0.2, 0.2);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b938f2ab90c1171f45523_image.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 1/2;
+            grid-row: 10/11;
+        }
     }
 
     &__ten {
@@ -182,6 +267,12 @@
         grid-row: 7/8;
         transform: translateY(-5rem);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0b94f92ddabc77c98253ce_josh-brolin-recounts-seeing-the-pirate-ship-in-the-goonies-for-the-first-time-and-how-he-ruined-the-first-take-social.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 2/3;
+            grid-row: 10/11;
+            transform: translateY(0);
+        }
     }
 
     &__eleven {
@@ -189,5 +280,10 @@
         grid-row: 7/8;
         transform: scale(0.6, 0.6);
         background-image: url("https://uploads-ssl.webflow.com/5cff83ac2044e22cb8cf2f11/5d0bcacdefd94731f3b15073_The-Goonies-Lost-Treasure-and-Maritime-Law-720x340.jpg");
+
+        @include respond(tab-port) {
+            grid-column: 3/4;
+            grid-row: 10/11;
+        }
     }
 }

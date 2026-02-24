@@ -8,17 +8,38 @@ Draggable.create(".goon-card", {
     inertia: true
 });
 
-// Loader Animation
+// Entrance Animation Timeline
+const entranceTL = gsap.timeline({ delay: 0.3 });
+
+entranceTL.from(".nav-box", {
+    y: -50,
+    autoAlpha: 0,
+    duration: 1,
+    stagger: 0.1,
+    ease: "power3.out"
+})
+    .from(".hero-title__up, .hero-title__down", {
+        y: 50,
+        autoAlpha: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out"
+    }, "-=0.8");
+
+const loaderElement = document.querySelector(".loader");
 const loaderTimeline = gsap.timeline({
+    paused: !loaderElement,
     onComplete: () => {
-        gsap.to(".loader", {
-            y: "-100%",
-            duration: 1.2,
-            ease: "power4.inOut",
-            onComplete: () => {
-                document.querySelector(".loader").style.display = "none";
-            }
-        });
+        if (loaderElement) {
+            gsap.to(".loader", {
+                y: "-100%",
+                duration: 1.2,
+                ease: "power4.inOut",
+                onComplete: () => {
+                    loaderElement.style.display = "none";
+                }
+            });
+        }
     }
 });
 
@@ -178,7 +199,19 @@ goonies.forEach((goonie) => {
     });
 });
 
-// Goonies character data
+gsap.from(".goonie", {
+    scrollTrigger: {
+        trigger: ".goonies-box",
+        start: "top 80%",
+        toggleActions: "play none none none"
+    },
+    y: 100,
+    autoAlpha: 0,
+    duration: 1.2,
+    stagger: 0.2,
+    ease: "power3.out"
+});
+
 const gooniesData = {
     mikey: {
         name: "Mikey",
@@ -279,6 +312,19 @@ goonies.forEach((goonie) => {
             , "-=1");
     });
 });
+// Gallery Images Entrance Animation on Scroll
+gsap.from(".gallery__image", {
+    scrollTrigger: {
+        trigger: ".gallery",
+        start: "top 70%",
+        toggleActions: "play none none none"
+    },
+    autoAlpha: 0,
+    duration: 1,
+    stagger: 0.1,
+    ease: "power2.out"
+});
+
 function gallery() {
     const tl = gsap.timeline({ paused: true });
     tl.to(".gallery__details", {
@@ -594,6 +640,32 @@ creditsCards.forEach((card) => {
     });
 });
 
+const creditsCardsArray = document.querySelectorAll(".credits__top > div");
+creditsCardsArray.forEach((card) => {
+    const direction = Math.floor(Math.random() * 4);
+    let startPos = { x: 0, y: 0 };
+
+    if (direction === 0) startPos.y = -100;      
+    
+    else if (direction === 1) startPos.y = 100;  
+    else if (direction === 2) startPos.x = -100;
+    else startPos.x = 100;                       
+
+    gsap.from(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none none"
+        },
+        x: startPos.x,
+        y: startPos.y,
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: Math.random() * 0.4 
+    });
+});
+
 // Skull Section Scroll Animation
 gsap.to(".skull", {
     scale: 1.5,
@@ -628,6 +700,19 @@ gsap.from(".share__line", {
         scrub: 1
     }
 });
+gsap.from(".share__content > *, .share__footer", {
+    scrollTrigger: {
+        trigger: ".share",
+        start: "top 90%",
+        toggleActions: "play none none none"
+    },
+    y: 50,
+    autoAlpha: 0,
+    duration: 1.2,
+    stagger: 0.2,
+    ease: "power3.out"
+});
+
 // Audio Player Toggle Logic
 const audioToggle = document.getElementById("audioToggle");
 const audioPlayer = document.getElementById("audioPlayer");
