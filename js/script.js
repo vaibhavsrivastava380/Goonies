@@ -85,7 +85,7 @@ heroTimeline.from(".hero-plot__text", {
 }, 0.3);
 
 heroTimeline.to(".hero-plot__line", {
-    height: "50vh",
+    height: "90%",
     duration: 0.5,
     ease: "power1.inOut"
 }, 0.45);
@@ -279,7 +279,119 @@ goonies.forEach((goonie) => {
             , "-=1");
     });
 });
-
+function gallery() {
+    const tl = gsap.timeline({ paused: true });
+    tl.to(".gallery__details", {
+        opacity: 0,
+    });
+    tl.to(
+        ".gallery__one",
+        {
+            scale: 1,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__two",
+        {
+            scale: 1,
+            translateX: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__three",
+        {
+            translateY: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__four",
+        {
+            scale: 1,
+            translateY: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__five",
+        {
+            scale: 1,
+            translateX: 0,
+            translateY: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__six",
+        {
+            scale: 1,
+            translateX: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__seven",
+        {
+            scale: 1,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__eight",
+        {
+            scale: 1,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__nine",
+        {
+            scale: 1,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__ten",
+        {
+            translateY: 0,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__eleven",
+        {
+            scale: 1,
+        },
+        "<"
+    );
+    tl.to(
+        ".gallery__cross--button",
+        {
+            autoAlpha: 1,
+        },
+        "<+0.5"
+    );
+    tl.to(
+        ".gallery__cross--button",
+        {
+            top: "80%",
+            duration: 0.5,
+            ease: "power2.out",
+        },
+        "<+0.5"
+    );
+    document.querySelector(".gallery__details").addEventListener("click", () => {
+        tl.play();
+    });
+    document
+        .querySelector(".gallery__cross--button")
+        .addEventListener("click", () => {
+            tl.reverse();
+        });
+}
+gallery();
 if (goonClose) {
     goonClose.addEventListener("click", (e) => {
         e.stopPropagation();
