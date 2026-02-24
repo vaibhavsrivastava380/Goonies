@@ -108,15 +108,16 @@
 
             &__text {
                 font-family: $font-montserrat;
-                font-size: 20px;
-                line-height: 2.6;
+                font-size: 18px;
+                line-height: 1.7;
                 color: $color-white;
                 font-weight: 300;
+                margin-bottom: 1%;
             }
 
             &__line {
                 position: absolute;
-                top: 40%;
+                top: 100%;
                 left: 50%;
                 transform: translateX(-50%);
                 width: 1px;
